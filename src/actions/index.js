@@ -1,5 +1,7 @@
-import { FETCH_USER } from "./types";
 import axios from "axios";
-export const fetchUser = () => {
-  axios.get("/api/current_user");
+import { FETCH_USER } from "./types";
+
+export const fetchUser = () => async dispatch => {
+  const userRes = await axios.get("/api/current_user");
+  dispatch({ type: FETCH_USER, payload: userRes.data });
 };
