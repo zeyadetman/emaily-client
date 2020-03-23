@@ -1,16 +1,35 @@
 import React from "react";
+import StripeCheckout from "react-stripe-checkout";
 
-function Header({ userInfo }) {
+function Header({ userInfo, handlePayment }) {
+  const onToken = token => {
+    console.log(token);
+    handlePayment(token);
+  };
+
   const renderLogAction = () => {
-    if (userInfo === null) return { text: "loading", action: "#" };
-    if (userInfo === false)
-      return { text: "Authenticate", action: `/auth/github` };
+    if (userInfo === null) return "Loading...";
+    if (userInfo === false) return <a href="/auth/github">Authenticate</a>;
 
     if (userInfo)
-      return {
-        text: `${userInfo.name} (Logout)`,
-        action: `/api/logout`
-      };
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center"
+          }}
+        >
+          <StripeCheckout
+            token={onToken}
+            stripeKey={process.env.REACT_APP_STRIPE_PUBLISH_KEY}
+            amount={500}
+            currency="USD"
+          />
+          <p style={{ margin: "0 10px" }}>Credits: {userInfo.credits}</p>
+          <a href="/api/logout">{userInfo.name} (Logout)</a>
+        </div>
+      );
   };
   return (
     <div>
@@ -23,7 +42,7 @@ function Header({ userInfo }) {
         }}
       >
         <h1>Emaily</h1>
-        <a href={renderLogAction().action}>{renderLogAction().text}</a>
+        {renderLogAction()}
       </header>
     </div>
   );
