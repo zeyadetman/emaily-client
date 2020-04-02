@@ -1,6 +1,6 @@
 import { FETCH_USER } from "./types";
 import Axios from "axios";
-
+window.axios = Axios;
 export const fetchUser = () => async dispatch => {
   try {
     const userRes = await Axios.get("/api/current_user");
