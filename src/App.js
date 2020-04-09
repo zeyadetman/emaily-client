@@ -6,8 +6,7 @@ import { fetchUser, handlePayment } from "./actions/index";
 import Header from "./components/header";
 import Dashboard from "./components/dashboard";
 import NewSurvey from "./components/newSurvey";
-
-const Surveys = () => <h1>Surveys</h1>;
+import Surveys from "./components/surveys";
 
 function App({ fetchUser, auth, handlePayment }) {
   useEffect(() => {

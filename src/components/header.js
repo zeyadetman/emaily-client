@@ -1,8 +1,9 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { Link } from "react-router-dom";
 
 function Header({ userInfo, handlePayment }) {
-  const onToken = token => {
+  const onToken = (token) => {
     console.log(token);
     handlePayment(token);
   };
@@ -17,7 +18,7 @@ function Header({ userInfo, handlePayment }) {
           style={{
             display: "flex",
             justifyContent: "space-around",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <StripeCheckout
@@ -38,10 +39,12 @@ function Header({ userInfo, handlePayment }) {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
-          backgroundColor: "#ffd400"
+          backgroundColor: "#ffd400",
         }}
       >
-        <h1>Emaily</h1>
+        <Link to="/">
+          <h1>Emaily</h1>
+        </Link>
         {renderLogAction()}
       </header>
     </div>

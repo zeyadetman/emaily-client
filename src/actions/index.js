@@ -1,4 +1,4 @@
-import { FETCH_USER, CREATE_SURVEY } from "./types";
+import { FETCH_USER, CREATE_SURVEY, FETCH_SURVEYS } from "./types";
 import Axios from "axios";
 window.axios = Axios;
 export const fetchUser = () => async (dispatch) => {
@@ -19,4 +19,9 @@ export const addNewSurvey = (values, history) => async (dispatch) => {
   const res = await Axios.post("/api/surveys", values);
   if (res) history.push("/surveys");
   dispatch({ type: CREATE_SURVEY, payload: res.data });
+};
+
+export const getSurveys = (values) => async (dispatch) => {
+  const res = await Axios.get("/api/surveys");
+  dispatch({ type: FETCH_SURVEYS, payload: res.data });
 };

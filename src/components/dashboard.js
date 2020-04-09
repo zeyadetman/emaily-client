@@ -17,7 +17,8 @@ function Dashboard() {
 
   return (
     <div>
-      Dashboard
+      <h1>Welcome to Emaily App</h1>
+      <Link to="/surveys">Click here to view your surveys</Link>
       <Link to="/surveys/new">
         <Fab color="primary" aria-label="add" className={classes.fab}>
           <AddIcon />
