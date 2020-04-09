@@ -7,9 +7,17 @@ import {
   Typography,
   makeStyles,
   Badge,
+  Fab,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import AddIcon from "@material-ui/icons/Add";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
   root: {
     minWidth: 275,
     background: "#e1e1e1",
@@ -27,7 +35,7 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-});
+}));
 
 function Surveys({ getSurveys, surveys }) {
   const classes = useStyles();
@@ -78,8 +86,12 @@ function Surveys({ getSurveys, surveys }) {
   return (
     <div>
       <h1>Surveys</h1>
-
       <div>{surveys ? renderSurveys() : "Loading..."}</div>
+      <Link to="/surveys/new">
+        <Fab color="primary" aria-label="add" className={classes.fab}>
+          <AddIcon />
+        </Fab>
+      </Link>
     </div>
   );
 }
